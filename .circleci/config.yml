@@ -25,7 +25,7 @@ jobs:
       - run:
           name: push
           command: |
-           echo "$PASSWORD" | docker login --username $USER --password-stdin
+           echo password | docker login --username username --password-stdin
            docker push https://hub.docker.com/alaa24/java-app:1.0 .
 
 workflows:
