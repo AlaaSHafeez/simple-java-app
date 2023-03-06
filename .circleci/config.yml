@@ -18,7 +18,7 @@ jobs:
           name: Build
           # command: mvn -B -DskipTests clean package
           command: |
-           dockerd
+           sudo dockerd
            docker build -t alaa24/java-app:1.0 .
 
       - run:
