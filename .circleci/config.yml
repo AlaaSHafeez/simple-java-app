@@ -50,8 +50,7 @@ jobs:
           name: Test cluster
 
   create-deployment:
-    docker:
-      - image: 'cimg/python:3.10'
+    executor: aws-eks/python3
     parameters:
       cluster-name:
         description: |
@@ -61,15 +60,11 @@ jobs:
       - checkout
       - aws-eks/update-kubeconfig-with-authenticator:
           cluster-name: << parameters.cluster-name >>
-          aws-profile: << parameters.aws-profile >>
-          aws-region: << parameters.aws-region >>
-          # cluster-context-alias: << parameters.cluster-context-alias >>
-          # cluster-authentication-role-arn: << parameters.cluster-authentication-role-arn >>
-          # kubeconfig-file-path: << parameters.kubeconfig-file-path >>
-          # verbose: << parameters.verbose >>
           install-kubectl: true
+          kubectl-version: v1.25.0
       - kubernetes/create-or-update-resource:
           get-rollout-status: true
+          show-kubectl-command: true
           resource-file-path: k8s/deployment.yaml
           resource-name: deployment/microservice-deployment
 
@@ -80,19 +75,16 @@ workflows:
 
   deployment:
     jobs:
-      # - aws-eks/create-cluster:
-      #     cluster-name: my-eks-demo
-      # - test-cluster:
-      #     cluster-name: my-eks-demo
-      #     requires:
-      #       - aws-eks/create-cluster
-      - create-deployment:
+      - aws-eks/create-cluster:
           cluster-name: my-eks-demo
-          aws-profile: default
-          aws-region: us-west-2
-          
-          # requires:
-          #   - aws-eks/create-cluster
+      - test-cluster:
+          cluster-name: my-eks-demo
+          requires:
+            - aws-eks/create-cluster
+      - create-deployment:
+          cluster-name: my-eks-demo          
+          requires:
+            - aws-eks/create-cluster
 
       - aws-eks/update-container-image:
           cluster-name: my-eks-demo
@@ -108,5 +100,5 @@ workflows:
 
       - aws-eks/delete-cluster:
           cluster-name: my-eks-demo
-          # requires:
-          #   - test-cluster
+          requires:
+            - test-cluster
