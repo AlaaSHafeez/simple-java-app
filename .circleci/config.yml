@@ -82,24 +82,24 @@ workflows:
       #     cluster-name: my-eks-demo
       #     requires:
       #       - aws-eks/create-cluster
-      - create-deployment:
-          cluster-name: my-eks-demo          
+      # - create-deployment:
+      #     cluster-name: my-eks-demo          
           # requires:
           #   - aws-eks/create-cluster
 
-      - aws-eks/update-container-image:
-          cluster-name: my-eks-demo
-          container-image-updates: 'alaa24/java-app:1.0'
-          post-steps:
-            - kubernetes/delete-resource:
-                resource-names: microservice-deployment
-                resource-types: deployment
-                wait: true
-          requires:
-            - create-deployment
-          resource-name: deployment/microservice-deployment
-
-      # - aws-eks/delete-cluster:
+      # - aws-eks/update-container-image:
       #     cluster-name: my-eks-demo
+      #     container-image-updates: 'alaa24/java-app:1.0'
+      #     post-steps:
+      #       - kubernetes/delete-resource:
+      #           resource-names: microservice-deployment
+      #           resource-types: deployment
+      #           wait: true
       #     requires:
-      #       - test-cluster
+      #       - create-deployment
+      #     resource-name: deployment/microservice-deployment
+
+      - aws-eks/delete-cluster:
+          cluster-name: my-eks-demo
+          requires:
+            - test-cluster
