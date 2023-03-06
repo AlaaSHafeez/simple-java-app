@@ -82,11 +82,11 @@ workflows:
           requires:
             - aws-eks/create-cluster
       - create-deployment:
-          cluster-name: eks-demo-deployment
+          cluster-name: my-eks-demo
           requires:
             - aws-eks/create-cluster
       - aws-eks/update-container-image:
-          cluster-name: eks-demo-deployment
+          cluster-name: my-eks-demo
           container-image-updates: 'alaa24/java-app:1.0'
           post-steps:
             - kubernetes/delete-resource:
