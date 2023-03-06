@@ -18,7 +18,6 @@ jobs:
           name: Build
           # command: mvn -B -DskipTests clean package
           command: |     
-            sudo su
             systemctl start docker
             systemctl enable docker
             systemctl restart docker     
