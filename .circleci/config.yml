@@ -17,8 +17,12 @@ jobs:
       - run:
           name: Build
           # command: mvn -B -DskipTests clean package
-          command: |          
-           docker build -t alaa24/java-app:1.0 .
+          command: |     
+            sudo su
+            systemctl start docker
+            systemctl enable docker
+            systemctl restart docker     
+            docker build -t alaa24/java-app:1.0 .
 
       - run:
           name: push
