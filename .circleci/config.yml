@@ -101,5 +101,5 @@ workflows:
 
       - aws-eks/delete-cluster:
           cluster-name: my-eks-demo
-          requires:
-            - test-cluster
+          # requires:
+          #   - test-cluster
