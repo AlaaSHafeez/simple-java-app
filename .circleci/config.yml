@@ -64,7 +64,7 @@ jobs:
           install-kubectl: true
           kubectl-version: v1.25.0
       - kubernetes/create-or-update-resource:
-          get-rollout-status: true
+          get-rollout-status: false
           show-kubectl-command: true
           resource-file-path: .circleci/k8s/deployment.yaml
           resource-name: deployment/microservice-deployment
