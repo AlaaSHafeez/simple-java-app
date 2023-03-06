@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: java-microservice-container
-        image: .dkr.ecr.amazonaws.com/:
+        image: alaa24/java-app:1.0
         ports:
         - containerPort: 4567
