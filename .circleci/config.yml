@@ -75,16 +75,16 @@ workflows:
 
   deployment:
     jobs:
-      - aws-eks/create-cluster:
-          cluster-name: my-eks-demo
-      - test-cluster:
-          cluster-name: my-eks-demo
-          requires:
-            - aws-eks/create-cluster
+      # - aws-eks/create-cluster:
+      #     cluster-name: my-eks-demo
+      # - test-cluster:
+      #     cluster-name: my-eks-demo
+      #     requires:
+      #       - aws-eks/create-cluster
       - create-deployment:
           cluster-name: my-eks-demo
-          requires:
-            - aws-eks/create-cluster
+          # requires:
+          #   - aws-eks/create-cluster
       - aws-eks/update-container-image:
           cluster-name: my-eks-demo
           container-image-updates: 'alaa24/java-app:1.0'
