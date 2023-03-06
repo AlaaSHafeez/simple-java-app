@@ -65,7 +65,7 @@ jobs:
       - kubernetes/create-or-update-resource:
           get-rollout-status: true
           resource-file-path: k8s/deployment.yaml
-          resource-name: deployment/java-deployment
+          resource-name: deployment/microservice-deployment
 
 workflows:
   build: # This is the name of the workflow, feel free to change it to better match your workflow.
@@ -90,12 +90,12 @@ workflows:
           container-image-updates: 'alaa24/java-app:1.0'
           post-steps:
             - kubernetes/delete-resource:
-                resource-names: java-deployment
+                resource-names: microservice-deployment
                 resource-types: deployment
                 wait: true
           requires:
             - create-deployment
-          resource-name: deployment/java-deployment
+          resource-name: deployment/microservice-deployment
 
       # - aws-eks/delete-cluster:
       #     cluster-name: my-eks-demo
