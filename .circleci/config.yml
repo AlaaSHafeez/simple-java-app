@@ -17,7 +17,7 @@ jobs:
       - run:
           name: Build
           # command: mvn -B -DskipTests clean package
-          command: docker build -t https://hub.docker.com/alaa24/java-app:1.0 .
+          command: docker build -t alaa24/java-app:1.0 .
 
       - run:
           name: push
