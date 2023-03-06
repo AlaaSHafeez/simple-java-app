@@ -88,12 +88,9 @@ workflows:
       #       - aws-eks/create-cluster
       - create-deployment:
           cluster-name: my-eks-demo
-          aws-profile: << parameters.aws-profile >>
-          aws-region: << parameters.aws-region >>
-          cluster-context-alias: << parameters.cluster-context-alias >>
-          cluster-authentication-role-arn: << parameters.cluster-authentication-role-arn >>
-          kubeconfig-file-path: << parameters.kubeconfig-file-path >>
-          verbose: << parameters.verbose >>
+          aws-profile: default
+          aws-region: us-west-2
+          
           # requires:
           #   - aws-eks/create-cluster
 
