@@ -14,16 +14,18 @@ jobs:
       # Checkout the code as the first step.
       - checkout
       # Use mvn clean and package as the standard maven build phase
+      - setup_remote_docker:
+          version: 20.10.14
       - run:
           name: Build
           # command: mvn -B -DskipTests clean package
           command: |     
-            dockerd     
-            docker build -t alaa24/java-app:1.0 .
+           docker build -t alaa24/java-app:1.0 .
 
       - run:
           name: push
-          command: docker push https://hub.docker.com/alaa24/java-app:1.0 .
+          command: |
+           docker push https://hub.docker.com/alaa24/java-app:1.0 .
 
 workflows:
   sample: # This is the name of the workflow, feel free to change it to better match your workflow.
