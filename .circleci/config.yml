@@ -63,10 +63,10 @@ jobs:
           cluster-name: << parameters.cluster-name >>
           aws-profile: << parameters.aws-profile >>
           aws-region: << parameters.aws-region >>
-          cluster-context-alias: << parameters.cluster-context-alias >>
-          cluster-authentication-role-arn: << parameters.cluster-authentication-role-arn >>
-          kubeconfig-file-path: << parameters.kubeconfig-file-path >>
-          verbose: << parameters.verbose >>
+          # cluster-context-alias: << parameters.cluster-context-alias >>
+          # cluster-authentication-role-arn: << parameters.cluster-authentication-role-arn >>
+          # kubeconfig-file-path: << parameters.kubeconfig-file-path >>
+          # verbose: << parameters.verbose >>
           install-kubectl: true
       - kubernetes/create-or-update-resource:
           get-rollout-status: true
