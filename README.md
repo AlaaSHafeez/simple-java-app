@@ -1,8 +1,9 @@
 # Deploy simple-java-app on AWS EKS
 
-> ![solution in business](files/presentation.pdf)
+## Cost optimized application CI/CD model​
+[embed]files/Presentation.pdf[/embed]
 
-## The following diagram shows an architecture for containerizing a Java microservice on Amazon EKS.
+### The following diagram shows an architecture for containerizing a Java microservice on Amazon EKS.
 
 > ![EKS cluster diagram](files/eks-diagram.png)
 
