@@ -1,6 +1,6 @@
 # Deploy simple-java-app on AWS EKS
 
-### [Cost-optimized CI/CD model Presentation​](files/Presentation.pdf)
+### > [Cost-optimized CI/CD model Presentation​](files/Presentation.pdf)
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------
 
