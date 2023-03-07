@@ -12,6 +12,6 @@
 
 - [Circle CI](www.circleci.com) - Cloud-based CI/CD service
 - [Amazon AWS](https://aws.amazon.com/) - Cloud services
-- [AWS CLI](https://aws.amazon.com/cli/) - Command-line tool for AWS
+- [AWS EKS](https://aws.amazon.com/eks/) - AWS Elastic Kubernetes Service
 - [CloudFormation](https://aws.amazon.com/cloudformation/) - Infrastrcuture as code
 - [Kubernetes](https://kubernetes.io/) - Container orchestration engine
