@@ -4,15 +4,19 @@ metadata:
   name: "java-microservice-ingress"
   annotations:
     kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/group.name: my-eks-alb
     alb.ingress.kubernetes.io/load-balancer-name: java-microservice-lb
+    alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
+    nginx.ingress.kubernetes.io/rewrite-target: /
   labels:
     app: java-microservice
 spec:
   rules:
-    - http:
+    - host: my-eks-app.devops.com
+      http:
         paths:
-          - path: /
+          - path: /main
             pathType: Prefix
             backend:
               service:
