@@ -1,6 +1,6 @@
 # Deploy simple-java-app on AWS EKS
 
-> ![solution in business](files/solution-in-business.pptx)
+> ![solution in business](files/presentation.pdf)
 
 ## The following diagram shows an architecture for containerizing a Java microservice on Amazon EKS.
 
