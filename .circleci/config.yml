@@ -12,10 +12,7 @@ jobs:
         #   username: $USER
         #   password: $PASSWORD      
 
-    parameter:
-      image_tag:
-        type: Integer
-        default: 1
+
     steps:
       - checkout
       - setup_remote_docker:
@@ -23,13 +20,13 @@ jobs:
       - run:
           name: Build
           command: |     
-           docker build -t alaa24/java-app:$($image_tag+0.1) .
+           docker build -t alaa24/java-app:$pipeline.number .
 
       - run:
           name: push
           command: |
            echo $PASSWORD | docker login --username $USER --password-stdin
-           docker push alaa24/java-app:$image_tag+0.1
+           docker push alaa24/java-app:$pipeline.number
   
   test-cluster:
     docker:
