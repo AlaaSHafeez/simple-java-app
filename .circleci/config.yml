@@ -11,9 +11,7 @@ jobs:
         # auth:
         #   username: $USER
         #   password: $PASSWORD      
-    branches:
-      only:
-        - main
+
     environment:
       image_tag: 1.0
         
