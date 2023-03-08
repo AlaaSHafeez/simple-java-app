@@ -20,13 +20,13 @@ jobs:
       - run:
           name: Build
           command: |     
-           docker build -t alaa24/java-app:$pipeline.number .
+           docker build -t alaa24/java-app:$CIRCLE_BUILD_NUM .
 
       - run:
           name: push
           command: |
            echo $PASSWORD | docker login --username $USER --password-stdin
-           docker push alaa24/java-app:$pipeline.number
+           docker push alaa24/java-app:$CIRCLE_BUILD_NUM
   
   test-cluster:
     docker:
