@@ -8,10 +8,15 @@ jobs:
   build-and-push:
     docker:
       - image: cimg/base:2023.03
-        auth:
-          username: $USER
-          password: $PASSWORD      
-
+        # auth:
+        #   username: $USER
+        #   password: $PASSWORD      
+    branches:
+      only:
+        main
+    environment:
+      image_tag: 1.0
+        
     steps:
       - checkout
       - setup_remote_docker:
@@ -19,13 +24,13 @@ jobs:
       - run:
           name: Build
           command: |     
-           docker build -t alaa24/java-app:1.0 .
+           docker build -t alaa24/java-app:$image_tag+0.1 .
 
       - run:
           name: push
           command: |
            echo $PASSWORD | docker login --username $USER --password-stdin
-           docker push alaa24/java-app:1.0
+           docker push alaa24/java-app:$image_tag+0.1
   
   test-cluster:
     docker:
@@ -79,33 +84,33 @@ workflows:
     jobs:
       - build-and-push
 
-  deployment:
-    jobs:
-      - aws-eks/create-cluster:
-          cluster-name: my-eks-demo
-      - test-cluster:
-          cluster-name: my-eks-demo
-          requires:
-            - aws-eks/create-cluster
+  # deployment:
+  #   jobs:
+  #     - aws-eks/create-cluster:
+  #         cluster-name: my-eks-demo
+  #     - test-cluster:
+  #         cluster-name: my-eks-demo
+  #         requires:
+  #           - aws-eks/create-cluster
 
-      - create-deployment:
-          cluster-name: my-eks-demo          
-          requires:
-            - aws-eks/create-cluster
+  #     - create-deployment:
+  #         cluster-name: my-eks-demo          
+  #         requires:
+  #           - aws-eks/create-cluster
 
-      - aws-eks/update-container-image:
-          cluster-name: my-eks-demo
-          container-image-updates: 'alaa24/java-app:1.0'
-          post-steps:
-            - kubernetes/delete-resource:
-                resource-names: microservice-deployment
-                resource-types: deployment
-                wait: true
-          requires:
-            - create-deployment
-          resource-name: deployment/microservice-deployment
+  #     - aws-eks/update-container-image:
+  #         cluster-name: my-eks-demo
+  #         container-image-updates: 'alaa24/java-app:1.0'
+  #         post-steps:
+  #           - kubernetes/delete-resource:
+  #               resource-names: microservice-deployment
+  #               resource-types: deployment
+  #               wait: true
+  #         requires:
+  #           - create-deployment
+  #         resource-name: deployment/microservice-deployment
 
-      - aws-eks/delete-cluster:
-          cluster-name: my-eks-demo
-          requires:
-            - aws-eks/create-cluster
+  #     - aws-eks/delete-cluster:
+  #         cluster-name: my-eks-demo
+  #         requires:
+  #           - aws-eks/create-cluster
